@@ -3,16 +3,13 @@ import System.Random
 import Data.Int
 import Data.List
 
-sqr x = x * x
-
-inCircle (x, y) = sqr x + sqr y <= 1
-
-toPairs []             = []
-toPairs (x1 : x2 : xs) = (x1, x2) : toPairs xs
+inCircle (x, y) = sqr x + sqr y <= 1 where sqr x = x * x
 
 monteCarloCircleArea :: Int64 -> [(Double, Double)] -> Double
 monteCarloCircleArea num darts = 
   4 * (fromIntegral (length $ filter inCircle $ genericTake num darts)) / (fromIntegral num)
+
+toPairs (x1 : x2 : xs) = (x1, x2) : toPairs xs
 
 main :: IO ()
 main = do
