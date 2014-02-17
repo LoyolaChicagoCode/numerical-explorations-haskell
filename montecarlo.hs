@@ -17,8 +17,10 @@ monteCarloCircleArea num darts =
 main :: IO ()
 main = do
   args <- getArgs
-  let [num] = map (read :: String -> Int64) args
-  g <- getStdGen
-  let pi = monteCarloCircleArea num $ toPairs $ (randoms g :: [Double])
-  putStrLn $ "pi = " ++ show pi ++ " for " ++ show num ++ " darts"
-
+  case map (read :: String -> Int64) args of
+    [num] -> do
+      g <- getStdGen
+      let pi = monteCarloCircleArea num $ toPairs $ (randoms g :: [Double])
+      putStrLn $ "pi = " ++ show pi ++ " for " ++ show num ++ " darts"
+    _ -> 
+      putStrLn "usage: ./montecarlo numDarts"
